@@ -53,6 +53,9 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    SDL_Texture* towerTexture = loadTexture("assets/Tower.png", renderer);
+    SDL_Texture* enemyTexture = loadTexture("assets/Enemy.png", renderer);
+
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
     Uint64 lastTick = SDL_GetPerformanceCounter();
@@ -65,6 +68,9 @@ int main(int argc, char* argv[]) {
     float squareSpeed = 200.0f;
 
     std::map<SDL_Keycode, bool> keyStates;
+
+    SDL_FRect towerRect = { 100, 100, 128, 256 };
+    SDL_FRect enemyRect = { 500, 300, 192, 192 };
 
     bool quit = false;
     SDL_Event e;
@@ -113,9 +119,14 @@ int main(int argc, char* argv[]) {
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         SDL_RenderFillRect(renderer, &fillRect);
 
+        SDL_RenderTexture(renderer, towerTexture, NULL, &towerRect);
+        SDL_RenderTexture(renderer, enemyTexture, NULL, &enemyRect);
+
         SDL_RenderPresent(renderer);
     }
 
+    SDL_DestroyTexture(towerTexture);
+    SDL_DestroyTexture(enemyTexture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
