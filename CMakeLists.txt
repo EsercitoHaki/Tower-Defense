@@ -19,6 +19,7 @@ include_directories(
     src/Entities
     src/Physics
     src/Utils
+    src/Graphics
 )
 
 add_executable(${PROJECT_NAME} ${GAME_SOURCES})
