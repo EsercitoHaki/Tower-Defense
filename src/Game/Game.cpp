@@ -41,11 +41,11 @@ bool Game::init(const char* title, int width, int height) {
 
     SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
 
-    m_player = new Player(m_renderer, "",
-                          (float)width / 2 - (width / 8),
-                          (float)height / 2 - (height / 8),
-                          (float)width / 4,
-                          (float)height / 4,
+    m_player = new Player(m_renderer, "../assets/Player.png",
+                          200,
+                          200,
+                          192,
+                          192,
                           200.0f);
     m_player->setInputHandler(&m_inputHandler);
     m_entities.push_back(m_player);
@@ -80,7 +80,13 @@ void Game::render() {
     SDL_RenderClear(m_renderer);
 
     for (Entity* entity : m_entities) {
-        entity->render();
+        if (entity != m_player) {
+            entity->render();
+        }
+    }
+
+    if (m_player) {
+        m_player->render();
     }
 
     SDL_RenderPresent(m_renderer);

@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include "Entity.h"
-#include "InputHandler.h"
+#include "../Utils/InputHandler.h"
 
 class Player : public Entity {
 public:

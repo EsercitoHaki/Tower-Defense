@@ -39,6 +39,10 @@ void Player::update(double deltaTime) {
 }
 
 void Player::render() {
-    SDL_SetRenderDrawColor(m_renderer, 255, 0, 0, 255);
-    SDL_RenderFillRect(m_renderer, &m_rect);
+    if (m_texture) {
+        SDL_RenderTexture(m_renderer, m_texture, NULL, &m_rect);
+    } else {
+        SDL_SetRenderDrawColor(m_renderer, 255, 0, 0, 255);
+        SDL_RenderFillRect(m_renderer, &m_rect);
+    }
 }

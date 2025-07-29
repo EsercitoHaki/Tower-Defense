@@ -36,10 +36,14 @@ SDL_Texture* AssetManager::getTexture(const std::string& path) {
 
     if (loadedSurface == nullptr) {
         std::cerr << "Unable to load image " << path << "! IMG_Error: " << SDL_GetError() << std::endl;
+        std::cerr << "Current working directory: " << SDL_GetBasePath() << std::endl;
     } else {
+        std::cout << "Successfully loaded image: " << path << std::endl;  // Debug info
         newTexture = SDL_CreateTextureFromSurface(m_renderer, loadedSurface);
         if (newTexture == nullptr) {
             std::cerr << "Unable to create texture from " << path << "! SDL_ERROR: " << SDL_GetError() << std::endl;
+        } else {
+            std::cout << "Successfully created texture from: " << path << std::endl;  // Debug info
         }
         SDL_DestroySurface(loadedSurface);
     }
