@@ -3,7 +3,6 @@
 
 #include <SDL3/SDL.h>
 #include <string>
-#include "../Graphics/AssetManager.h"
 
 class Entity {
 public:
@@ -15,7 +14,6 @@ public:
 
     SDL_FRect getRect() const { return m_rect; }
     void setPosition(float x, float y) { m_rect.x = x; m_rect.y = y; }
-
 protected:
     SDL_Renderer* m_renderer;
     SDL_Texture* m_texture;
