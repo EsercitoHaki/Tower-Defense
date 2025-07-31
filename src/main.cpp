@@ -1,4 +1,4 @@
-#include "Game/Game.h"
+#include "Game/game.h"
 #include <iostream>
 
 const int SCREEN_WIDTH = 800;
