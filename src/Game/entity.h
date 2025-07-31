@@ -3,7 +3,7 @@
 
 #include <SDL3/SDL.h>
 #include <string>
-#include "../Graphics/AssetManager.h"
+#include "../Graphics/asset_manager.h"
 
 class Entity {
 public:

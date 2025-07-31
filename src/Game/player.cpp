@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "player.h"
 #include <SDL3/SDL.h>
 
 Player::Player(SDL_Renderer* renderer, const std::string& texturePath, float x, float y, float w, float h, float speed)

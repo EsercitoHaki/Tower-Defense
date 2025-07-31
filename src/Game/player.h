@@ -1,8 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Entity.h"
-#include "../Utils/InputHandler.h"
+#include "entity.h"
+#include "../Utils/input_handler.h"
 
 class Player : public Entity {
 public:

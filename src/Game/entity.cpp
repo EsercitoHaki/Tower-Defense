@@ -1,4 +1,4 @@
-#include "Entity.h"
+#include "entity.h"
 #include <iostream>
 
 Entity::Entity(SDL_Renderer* renderer, const std::string& texturePath, float x, float y, float w, float h)

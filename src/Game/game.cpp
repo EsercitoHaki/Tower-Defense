@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "game.h"
 #include <iostream>
 
 Game::Game() : m_isRunning(false), m_window(nullptr), m_renderer(nullptr),
@@ -38,8 +38,18 @@ bool Game::init(const char* title, int width, int height) {
     }
 
     AssetManager::getInstance(m_renderer);
-
     SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
+
+    // Load map từ JSON file
+    m_map = new Map("../assets/map/level1.json", 48);
+
+    // Tạo waypoints dựa trên path tiles trong map (tùy chỉnh theo map của bạn)
+    std::vector<SDL_Point> waypoints = {
+        {8*48+24, 0*48+24}, {8*48+24, 11*48+24}
+    };
+
+    // Khởi tạo enemy
+    m_enemies.push_back(new Enemy(new Path(waypoints), waypoints[0].x, waypoints[0].y, 100.0f));
 
     m_player = new Player(m_renderer, "../assets/Player.png",
                           200,
@@ -74,15 +84,27 @@ void Game::update() {
     for (Entity* entity : m_entities) {
         entity->update(m_deltaTime);
     }
+
+    for (Enemy* enemy : m_enemies) {
+        enemy->update((float)m_deltaTime);
+    }
 }
 
 void Game::render() {
     SDL_RenderClear(m_renderer);
 
+    if (m_map) {
+        m_map->renderMap(m_renderer);
+    }
+
     for (Entity* entity : m_entities) {
         if (entity != m_player) {
             entity->render();
         }
+    }
+
+    for (Enemy* enemy : m_enemies) {
+        enemy->render(m_renderer);
     }
 
     if (m_player) {
@@ -97,6 +119,14 @@ void Game::clean() {
         delete entity;
     }
     m_entities.clear();
+
+    for (auto enemy : m_enemies) delete enemy;
+    m_enemies.clear();
+
+    if (m_map) {
+        delete m_map;
+        m_map = nullptr;
+    }
 
     AssetManager::getInstance().clean();
 

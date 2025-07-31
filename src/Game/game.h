@@ -3,17 +3,19 @@
 
 #include <SDL3/SDL.h>
 #include <vector>
-#include "../Utils/InputHandler.h"
-#include "Entity.h"
-#include "Player.h"
-#include "../Graphics/AssetManager.h"
+#include "entity.h"
+#include "player.h"
+#include "enemy.h"
+#include "../Utils/input_handler.h"
+#include "../Graphics/asset_manager.h"
+#include "../Map/map.h"
 
 class Game {
 public:
     Game();
     ~Game();
 
-    bool init(const char* title, int width, int height); // Removed xpos, ypos, fullscreen
+    bool init(const char* title, int width, int height);
     void handleEvents();
     void update();
     void render();
@@ -26,14 +28,14 @@ private:
     SDL_Renderer* m_renderer;
 
     InputHandler m_inputHandler;
-    std::vector<Entity*> m_entities; // Store all entities (including player, towers, enemies)
-
-    // Delta time
+    std::vector<Entity*> m_entities; 
     Uint64 m_lastTick;
     double m_deltaTime;
 
-    // Direct pointer to the player for easy access
+    Map* m_map;
     Player* m_player;
+    std::vector<Enemy*> m_enemies;
+    std::vector<Path*> m_paths; // Optional: if you want to manage paths separately
 };
 
-#endif // GAME_H
+#endif
